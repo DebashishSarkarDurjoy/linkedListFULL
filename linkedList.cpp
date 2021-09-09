@@ -66,6 +66,29 @@ node* recReverse(node* head) {
     return shead;
 }
 
+node* iterReverse(node* head) {
+    node* nextNode = NULL;
+    node* prevNode = NULL;
+    if (head != NULL) {
+        prevNode = head;
+        nextNode = head->next;
+        head->next = NULL;
+    }
+    else {
+        return head;
+    }
+
+
+    node* currentNode;
+    while (nextNode != NULL) {
+        currentNode = nextNode;
+        nextNode = nextNode->next;
+        currentNode->next = prevNode;
+        prevNode = currentNode;
+    }
+
+    return currentNode;
+}
 
 
 //---------linkedList----------//
@@ -82,7 +105,9 @@ int main(void) {
     // insertAtHead(head, 0);
     // insertInMiddle(head, 10, 3);
     printLL(head);
-    head = recReverse(head);
+    head = iterReverse(head);
     printLL(head);
+
+
     return 0;
 }
