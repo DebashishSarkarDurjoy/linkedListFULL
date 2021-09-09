@@ -53,6 +53,19 @@ void insertInMiddle(node* &head, int data, int pos) {
     }
 }
 
+node* recReverse(node* head) {
+    // Base Case
+    if (head == NULL || head->next == NULL) {
+        return head;
+    }
+
+    //Otherwise
+    node* shead = recReverse(head->next);
+    head->next->next = head;
+    head->next = NULL;
+    return shead;
+}
+
 
 
 //---------linkedList----------//
