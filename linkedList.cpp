@@ -9,6 +9,7 @@ public:
 
     node(int data) {
         this->data = data;
+        this->next = NULL;
     }
 };
 //---------node----------//
@@ -66,29 +67,21 @@ node* recReverse(node* head) {
     return shead;
 }
 
-node* iterReverse(node* head) {
-    node* nextNode = NULL;
-    node* prevNode = NULL;
-    if (head != NULL) {
-        prevNode = head;
-        nextNode = head->next;
-        head->next = NULL;
-    }
-    else {
-        return head;
-    }
+void iterReverseUdemy(node* &head) {
+    node* current = head;
+    node* prev = NULL;
+    node* temp;
 
-
-    node* currentNode;
-    while (nextNode != NULL) {
-        currentNode = nextNode;
-        nextNode = nextNode->next;
-        currentNode->next = prevNode;
-        prevNode = currentNode;
+    while (current != NULL) {
+        temp = current->next;
+        current->next = prev;
+        prev = current;
+        current = temp;
     }
 
-    return currentNode;
+    head = prev;
 }
+
 
 
 //---------linkedList----------//
@@ -105,7 +98,7 @@ int main(void) {
     // insertAtHead(head, 0);
     // insertInMiddle(head, 10, 3);
     printLL(head);
-    head = iterReverse(head);
+    iterReverseUdemy(head);
     printLL(head);
 
 
