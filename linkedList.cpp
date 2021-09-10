@@ -82,7 +82,32 @@ void iterReverseUdemy(node* &head) {
     head = prev;
 }
 
+node* kReverse(node *head, int k) {
+        //base
+        if (head == NULL) {
+            return head;
+        }
 
+        //otherwise reverse first k nodes
+        node* current = head;
+        node* prev = NULL;
+        node* temp;
+        int cnt = 1;
+
+        while(current != NULL && cnt <= 3) {
+            temp = current->next;
+            current->next = prev;
+            prev = current;
+            current = temp;
+            cnt++;
+        }
+
+        if (temp != NULL) {
+            head->next = kReverse(temp, k);
+        }
+
+        return prev;
+}
 
 //---------linkedList----------//
 
@@ -98,7 +123,7 @@ int main(void) {
     // insertAtHead(head, 0);
     // insertInMiddle(head, 10, 3);
     printLL(head);
-    iterReverseUdemy(head);
+    head = kReverse(head, 3);
     printLL(head);
 
 
