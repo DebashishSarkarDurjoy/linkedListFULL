@@ -109,21 +109,63 @@ node* kReverse(node *head, int k) {
         return prev;
 }
 
+node* merge(node* a, node* b) {
+    //base case
+    if (a == NULL) {
+        return b;
+    }
+    if (b == NULL) {
+        return a;
+    }
+
+    //recursive case
+    node* c;
+    if (a->data < b->data) {
+        c = a;
+        c->next = merge(a->next, b);
+    }
+    else {
+        c = b;
+        c->next = merge(a, b->next);
+    }
+
+    return c;
+}
+
 //---------linkedList----------//
 
 int main(void) {
-    node* head = NULL;
-    for(int i = 10; i >= 1; i--) {
-        insertAtHead(head, i);
-    }
-    // insertAtHead(head, 4);
-    // insertAtHead(head, 3);
-    // insertAtHead(head, 2);
-    // insertAtHead(head, 1);
-    // insertAtHead(head, 0);
-    // insertInMiddle(head, 10, 3);
-    printLL(head);
-    head = kReverse(head, 3);
+    // node* head = NULL;
+    // for(int i = 10; i >= 1; i--) {
+    //     insertAtHead(head, i);
+    // }
+    // // insertAtHead(head, 4);
+    // // insertAtHead(head, 3);
+    // // insertAtHead(head, 2);
+    // // insertAtHead(head, 1);
+    // // insertAtHead(head, 0);
+    // // insertInMiddle(head, 10, 3);
+    // printLL(head);
+    // head = kReverse(head, 3);
+    // printLL(head);
+
+    // -----------------
+    node * a = NULL;
+    node * b = NULL;
+
+    insertAtHead(a, 10);
+    insertAtHead(a, 7);
+    insertAtHead(a, 5);
+    insertAtHead(a, 1);
+
+    insertAtHead(b, 6);
+    insertAtHead(b, 3);
+    insertAtHead(b, 2);
+
+    printLL(a);
+    printLL(b);
+
+    node * head = merge(a, b);
     printLL(head);
 
 
