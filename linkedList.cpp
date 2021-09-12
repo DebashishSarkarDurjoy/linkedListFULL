@@ -132,6 +132,18 @@ node* merge(node* a, node* b) {
     return c;
 }
 
+int runnerTechnique(node* head) {
+    node* h1 = head;
+    node* h2 = head;
+
+    while (h1->next != NULL && h1->next->next != NULL) {
+        h1 = h1->next->next;
+        h2 = h2->next;
+    }
+
+    return h2->data;
+}
+
 //---------linkedList----------//
 
 int main(void) {
@@ -153,6 +165,8 @@ int main(void) {
     node * a = NULL;
     node * b = NULL;
 
+    insertAtHead(a, 12);
+    insertAtHead(a, 11);
     insertAtHead(a, 10);
     insertAtHead(a, 7);
     insertAtHead(a, 5);
@@ -165,8 +179,12 @@ int main(void) {
     printLL(a);
     printLL(b);
 
-    node * head = merge(a, b);
-    printLL(head);
+    // node * head = merge(a, b);
+
+    int midValue = runnerTechnique(a);
+    printf("\n%d\n", midValue);
+    midValue = runnerTechnique(b);
+    printf("\n%d\n", midValue);
 
 
     return 0;
