@@ -21,6 +21,17 @@ void insertNodeAtHead(Node* &Head, int value) {
   return;
 }
 
+void insertAtMiddle(Node* Head, int pos, int value) {
+  Node* current = Head;
+  while (Head != NULL && pos > 2) {
+    pos--;
+    current = current->next;
+  }
+  Node* newNode = new Node(value);
+  newNode->next = current->next;
+  current->next = newNode;
+}
+
 void printLL(Node* Head) {
   Node* current = Head;
 
@@ -36,6 +47,7 @@ int main(void) {
   for (int i = 10; i > 0; i--) {
     insertNodeAtHead(head, i);
   }
+  insertAtMiddle(head, 8, 100);
   printLL(head);
 
   return 0;

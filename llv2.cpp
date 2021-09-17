@@ -34,6 +34,17 @@ public:
     }
     cout << endl;
   }
+
+  void insertAtMiddle(int pos, int value) {
+    Node* current = this->head;
+    while (current != NULL && pos > 2) {
+      pos--;
+      current = current->next;
+    }
+    Node* newNode = new Node(value);
+    newNode->next = current->next;
+    current->next = newNode;
+  }
 };
 
 
@@ -42,7 +53,7 @@ int main(void) {
   linkedList myLL = linkedList();
 
   for (int i = 10; i > 0; i--) myLL.insertAtHead(i);
-
+  myLL.insertAtMiddle(8, 100);
   myLL.printLL();
 
   return 0;
