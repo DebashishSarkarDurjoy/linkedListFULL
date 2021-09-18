@@ -48,6 +48,22 @@ Node* rReverse(Node* head) {
   return shead;
 }
 
+//iterative reverse
+Node* iReverse(Node* head) {
+  Node* prev = NULL;
+  Node* current = head;
+  Node* next = head;
+
+  while (current != NULL) {
+    next = current->next;
+    current->next = prev;
+    prev = current;
+    current = next;
+  }
+
+  return prev;
+}
+
 void printLL(Node* Head) {
   Node* current = Head;
 
@@ -64,7 +80,8 @@ int main(void) {
     insertNodeAtHead(head, i);
   }
   //insertAtMiddle(head, 8, 100);
-  head = rReverse(head);
+  // head = rReverse(head);
+  head = iReverse(head);
   printLL(head);
 
   return 0;
