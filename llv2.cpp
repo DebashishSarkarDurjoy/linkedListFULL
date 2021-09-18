@@ -15,6 +15,22 @@ class linkedList {
 private:
   Node* head;
 
+  Node* rReverse(Node* node) {
+    //base case
+    if (node->next == NULL) {
+      return node;
+    }
+
+    //otherwise
+    Node* shead = rReverse(node->next);
+
+    //on the way back
+    node->next->next = node;
+    node->next = NULL;
+
+    return shead; //return this down the path
+  }
+
 public:
   linkedList() {
     this->head = NULL;
@@ -45,6 +61,10 @@ public:
     newNode->next = current->next;
     current->next = newNode;
   }
+
+  void recursiveReverse() {
+    this->head = this->rReverse(this->head);
+  }
 };
 
 
@@ -53,7 +73,8 @@ int main(void) {
   linkedList myLL = linkedList();
 
   for (int i = 10; i > 0; i--) myLL.insertAtHead(i);
-  myLL.insertAtMiddle(8, 100);
+  // myLL.insertAtMiddle(8, 100);
+  myLL.recursiveReverse();
   myLL.printLL();
 
   return 0;

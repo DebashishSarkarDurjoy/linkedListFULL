@@ -32,6 +32,22 @@ void insertAtMiddle(Node* Head, int pos, int value) {
   current->next = newNode;
 }
 
+// recursive reverse a linked list
+Node* rReverse(Node* head) {
+  //base case
+  if (head->next == NULL) {
+    return head;
+  }
+
+  //recursive case
+  Node* shead = rReverse(head->next);
+
+  head->next->next = head;
+  head->next = NULL;
+
+  return shead;
+}
+
 void printLL(Node* Head) {
   Node* current = Head;
 
@@ -47,7 +63,8 @@ int main(void) {
   for (int i = 10; i > 0; i--) {
     insertNodeAtHead(head, i);
   }
-  insertAtMiddle(head, 8, 100);
+  //insertAtMiddle(head, 8, 100);
+  head = rReverse(head);
   printLL(head);
 
   return 0;
