@@ -11,7 +11,7 @@ public:
   }
 };
 
-void insertNodeAtHead(Node* &Head, int value) {
+void insertAtHead(Node* &Head, int value) {
   //if (Head == NULL) Head = new Node(value);
 
   Node* newNode = new Node(value);
@@ -101,14 +101,52 @@ Node* kReverse(Node* head, int k) {
   return prev;
 }
 
+Node* merge(Node* a, Node* b) {
+  //base case
+  if (a == NULL) {
+    return b;
+  }
+  if (b == NULL) {
+    return a;
+  }
+
+  //on the way up
+  Node* c;
+  if (a->value < b->value) {
+    c = a;
+    c->next = merge(a->next, b);
+  }
+  else {
+    c = b;
+    c->next = merge(a, b->next);
+  }
+
+  //on the way back
+  return c;
+
+}
+
 int main(void) {
   Node* head = NULL;
-  for (int i = 10; i > 0; i--) {
-    insertNodeAtHead(head, i);
-  }
+  Node * a = NULL;
+  Node * b = NULL;
+
+  insertAtHead(a, 12);
+  insertAtHead(a, 11);
+  insertAtHead(a, 10);
+  insertAtHead(a, 7);
+  insertAtHead(a, 5);
+  insertAtHead(a, 1);
+
+  insertAtHead(b, 6);
+  insertAtHead(b, 3);
+  insertAtHead(b, 2);
+
+  printLL(a);
+  printLL(b);
   //insertAtMiddle(head, 8, 100);
   // head = rReverse(head);
-  head = kReverse(head, 3);
+  head = merge(a, b);
   printLL(head);
 
   return 0;
