@@ -74,6 +74,33 @@ void printLL(Node* Head) {
   cout << endl;
 }
 
+Node* kReverse(Node* head, int k) {
+  //base case
+  if (head == NULL) return NULL;
+
+  //on the way up
+  Node* prev = NULL;
+  Node* current = head;
+  Node* next = head;
+  int counter = 1;
+
+  while (current != NULL && counter <= k) {
+    next = current->next;
+    current->next = prev;
+    prev = current;
+    current = next;
+    counter++;
+  }
+
+  // recursive call
+  if (current != NULL) {
+    head->next = kReverse(current, 3);
+  }
+
+  //on the way back
+  return prev;
+}
+
 int main(void) {
   Node* head = NULL;
   for (int i = 10; i > 0; i--) {
@@ -81,7 +108,7 @@ int main(void) {
   }
   //insertAtMiddle(head, 8, 100);
   // head = rReverse(head);
-  head = iReverse(head);
+  head = kReverse(head, 3);
   printLL(head);
 
   return 0;
